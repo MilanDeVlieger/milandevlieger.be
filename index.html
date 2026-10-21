@@ -87,57 +87,96 @@ img,svg{display:block}
 @media(max-width:900px){.links,.nav>.btn{display:none}.burger{display:grid}}
 
 /* hero */
-.hero{padding:var(--s-8) 0 var(--s-9);overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:var(--s-7);align-items:center}
+.hero{padding:var(--s-5) 0 var(--s-9);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);grid-template-areas:"copy stage" "conf stage";column-gap:var(--s-7);align-items:center}
+.hero-copy{grid-area:copy;align-self:end;min-width:0}
+.conf{grid-area:conf;align-self:start;min-width:0}
+.stage{grid-area:stage;min-width:0}
 .hero-tag{display:inline-flex;align-items:center;gap:var(--s-2);color:var(--grijs)}
 .hero-tag i{width:8px;height:8px;border-radius:50%;background:#1FA37A;box-shadow:0 0 0 3px rgba(31,163,122,.18)}
-h1{font-size:var(--t-h1);line-height:1;letter-spacing:-.034em;font-weight:700;font-variation-settings:"opsz" 96;margin:var(--s-5) 0}
+h1{font-size:clamp(2.5rem,1.3rem + 4.4vw,4.4rem);line-height:1;letter-spacing:-.034em;font-weight:700;font-variation-settings:"opsz" 96;margin:var(--s-5) 0 var(--s-4)}
 .mark{background-image:linear-gradient(var(--signaal),var(--signaal));background-repeat:no-repeat;background-size:100% .42em;background-position:0 88%;padding:0 .06em;margin:0 -.06em;animation:mark 600ms 450ms var(--ease) backwards}
 @keyframes mark{from{background-size:0 .42em}}
-.lead{font-size:var(--t-lg);color:var(--grijs);max-width:34ch;line-height:1.55}
+.lead{font-size:var(--t-lg);color:var(--grijs);max-width:36ch;line-height:1.55}
 .lead strong{color:var(--inkt);font-weight:600}
-.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-6)}
-.hero-facts{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);margin-top:var(--s-6);list-style:none;color:var(--grijs)}
+.hero-facts{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);margin-top:var(--s-5);list-style:none;color:var(--grijs)}
 .hero-facts li{display:flex;align-items:center;gap:var(--s-2)}
 .hero-facts li::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--leie)}
 
-/* hero stage: the build demo */
+/* configurator */
+.conf{margin-top:var(--s-5);padding:var(--s-5);background:var(--wit);border:1.5px solid var(--inkt);border-radius:var(--r-lg);box-shadow:6px 6px 0 var(--inkt)}
+.conf-label{display:flex;justify-content:space-between;align-items:center;gap:var(--s-3);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--leie);margin-bottom:var(--s-3)}
+.conf-label span:first-child{display:inline-flex;align-items:center;gap:var(--s-2)}
+.conf-label span:first-child::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--signaal);box-shadow:0 0 0 3px rgba(255,199,44,.3)}
+.namefield{display:flex;align-items:center;gap:var(--s-2);border:1.5px solid var(--lijn-donker);border-radius:var(--r-md);padding:var(--s-1) var(--s-1) var(--s-1) var(--s-4);background:var(--papier);transition:border-color var(--d-ui) var(--ease),background var(--d-ui) var(--ease)}
+.namefield:focus-within{border-color:var(--leie);background:var(--wit)}
+.namefield input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:var(--t-lg);font-weight:600;letter-spacing:-.01em;color:var(--inkt);padding:var(--s-2) 0;outline:none}
+.namefield input::placeholder{color:#7C868E;font-weight:500}
+.dice{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 var(--s-3);border-radius:var(--r-sm);border:0;background:var(--inkt);color:var(--wit);font:inherit;font-size:var(--t-xs);font-weight:600;cursor:pointer;transition:background var(--d-ui) var(--ease)}
+.dice:hover{background:var(--leie)}
+.dice svg{transition:transform var(--d-ui) var(--ease)}
+.dice:active svg{transform:rotate(90deg)}
+.sectors{border:0;margin-top:var(--s-4)}
+.sectors legend{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--grijs);margin-bottom:var(--s-2)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:38px;padding:0 var(--s-4);border:1.5px solid var(--lijn-donker);border-radius:var(--r-pill);font-size:var(--t-sm);font-weight:600;transition:background var(--d-ui) var(--ease),border-color var(--d-ui) var(--ease),color var(--d-ui) var(--ease)}
+.chip:hover span{border-color:var(--inkt)}
+.chip input:checked+span{background:var(--inkt);border-color:var(--inkt);color:var(--wit)}
+.chip input:focus-visible+span{outline:3px solid var(--leie);outline-offset:2px}
+.conf-cta .btn{white-space:normal;line-height:1.25;padding-block:var(--s-2)}
+.conf-cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3);margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px dashed var(--lijn-donker)}
+.linkbtn{border:0;background:none;font:inherit;font-size:var(--t-sm);font-weight:600;color:var(--leie);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:var(--s-2) var(--s-1);border-radius:6px}
+.linkbtn:hover{color:var(--inkt)}
+.linkbtn.ok{color:#137A57;text-decoration:none}
+
+/* hero stage: the live preview */
 .stage{position:relative;perspective:1800px;padding:var(--s-6) 0 var(--s-7)}
 .scene{position:relative;transform-style:preserve-3d;transform:rotateY(calc(-14deg + var(--ry,0deg))) rotateX(calc(7deg + var(--rx,0deg)));transition:transform var(--d-ui) var(--ease);animation:scene-in var(--d-hero) var(--ease) backwards}
 @keyframes scene-in{from{opacity:0;transform:rotateY(-30deg) rotateX(14deg) translateY(28px)}}
+.scene.bump{animation:bump 420ms var(--ease)}
+@keyframes bump{40%{transform:rotateY(calc(-8deg + var(--ry,0deg))) rotateX(calc(4deg + var(--rx,0deg))) scale(.985)}}
 .browser{container-type:inline-size;background:var(--wit);border-radius:var(--r-md);box-shadow:var(--shadow-lg);border:1px solid var(--lijn);overflow:hidden}
 .chrome{display:flex;align-items:center;gap:2cqw;padding:1.8cqw 2.4cqw;border-bottom:1px solid var(--lijn);background:#F8FAFA}
 .chrome i{width:1.7cqw;height:1.7cqw;border-radius:50%;background:var(--lijn-donker)}
-.url{flex:1;margin-left:2cqw;font-family:var(--f-mono);font-size:2.1cqw;color:var(--grijs);background:var(--papier);border-radius:var(--r-pill);padding:.8cqw 2.4cqw;display:flex;gap:1cqw;align-items:center}
+.url{flex:1;min-width:0;margin-left:2cqw;font-family:var(--f-mono);font-size:2.1cqw;color:var(--grijs);background:var(--papier);border-radius:var(--r-pill);padding:.8cqw 2.4cqw;display:flex;gap:1cqw;align-items:center;white-space:nowrap;overflow:hidden}
 .url b{color:#1FA37A;font-weight:500}
-/* mock client site (fictional example) */
-.site{--warm:#FBF3E6;--korst:#7A3E12;--deeg:#E9B872;--bruin:#2B1A0E;background:var(--warm);color:var(--bruin);aspect-ratio:16/10.2;padding:3cqw 4cqw;display:grid;grid-template-rows:auto 1fr auto;gap:3cqw;font-size:2.2cqw}
-.s-nav{display:flex;justify-content:space-between;align-items:center}
-.s-logo{font-weight:700;font-size:2.8cqw;letter-spacing:-.03em}
-.s-links{display:flex;gap:2.6cqw;font-size:1.8cqw;opacity:.75}
-.s-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3cqw;align-items:center}
-.s-h{font-size:5.4cqw;line-height:1;letter-spacing:-.04em;font-weight:700}
-.s-p{font-size:1.9cqw;opacity:.75;margin:1.6cqw 0 2.4cqw;line-height:1.4}
-.s-btn{display:inline-block;background:var(--bruin);color:var(--warm);font-weight:600;font-size:1.8cqw;padding:1.2cqw 2.6cqw;border-radius:var(--r-pill)}
-.loaf{aspect-ratio:1.35;border-radius:50%;background:radial-gradient(60% 50% at 40% 35%,#F2C98A,var(--deeg) 55%,#C0802F);position:relative;transform:rotate(-8deg);box-shadow:0 2cqw 4cqw -1.5cqw rgba(122,62,18,.5)}
-.loaf::before,.loaf::after{content:"";position:absolute;height:12%;width:46%;border-radius:50%;border-top:.5cqw solid rgba(122,62,18,.55);left:27%;top:30%;transform:rotate(-14deg)}
-.loaf::after{top:52%;left:24%}
+/* the mock client site; every color comes from the chosen sector theme */
+.scene{--bg:#FBF3E6;--ink:#2B1A0E;--acc:#D99A4E;--soft:#F2C98A;--card:#FFFFFF;--btn:#2B1A0E;--btnink:#FBF3E6;--disp:var(--f-sans);--dispw:700;--dispst:normal;--disptt:none;--displs:-.04em}
+.site{background:var(--bg);color:var(--ink);aspect-ratio:16/10.2;padding:3cqw 4cqw;display:grid;grid-template-rows:auto 1fr auto;gap:3cqw;font-size:2.2cqw;transition:background 250ms var(--ease),color 250ms var(--ease)}
+.s-nav{display:flex;justify-content:space-between;align-items:center;gap:3cqw}
+.s-logo{display:flex;align-items:center;gap:1.4cqw;font-weight:700;font-size:2.6cqw;letter-spacing:-.02em;min-width:0}
+.s-logo b{flex:none;width:4.4cqw;height:4.4cqw;border-radius:1.2cqw;background:var(--acc);color:var(--bg);display:grid;place-items:center;font-size:2.4cqw;font-weight:700}
+.s-logo span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34cqw}
+.s-links{display:flex;gap:2.6cqw;font-size:1.8cqw;opacity:.75;flex:none}
+.s-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:3cqw;align-items:center}
+.s-h{font-family:var(--disp);font-size:5.2cqw;line-height:1.02;letter-spacing:var(--displs);font-weight:var(--dispw);font-style:var(--dispst);text-transform:var(--disptt)}
+.s-p{font-size:1.9cqw;opacity:.78;margin:1.6cqw 0 2.4cqw;line-height:1.4}
+.s-btn{display:inline-block;background:var(--btn);color:var(--btnink);font-weight:600;font-size:1.8cqw;padding:1.2cqw 2.6cqw;border-radius:var(--r-pill)}
+.s-art svg,.p-art svg{width:100%;height:auto;overflow:visible}
 .s-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw}
-.s-tile{background:var(--wit);border-radius:1.4cqw;padding:1.6cqw;display:flex;align-items:center;gap:1.6cqw;font-size:1.7cqw;font-weight:600}
-.s-tile span{width:4.2cqw;height:4.2cqw;border-radius:50%;flex:none}
-/* skeleton overlays: part of the load sequence only; content is always present underneath */
+.s-tile{background:var(--card);border-radius:1.4cqw;padding:1.6cqw;display:flex;align-items:center;gap:1.6cqw;font-size:1.7cqw;font-weight:600}
+.s-tile i{width:4.2cqw;height:4.2cqw;border-radius:50%;flex:none}
+.a{fill:var(--acc)}.i{fill:var(--ink)}.s{fill:var(--soft)}.b{fill:var(--bg)}.c{fill:var(--card)}
+.ls{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.la{fill:none;stroke:var(--acc);stroke-linecap:round;stroke-linejoin:round}
+/* skeleton sweep: plays on load and on every sector switch; content is always underneath */
 .sk{position:relative}
 .sk::after{content:"";position:absolute;inset:-.3cqw;border-radius:1cqw;background:repeating-linear-gradient(135deg,#E4E9EC 0 1cqw,#EDF1F3 1cqw 2cqw);opacity:0;pointer-events:none;animation:sk 380ms var(--ease) backwards;animation-delay:var(--d,300ms)}
+.scene.re .sk::after{animation-name:sk2;animation-duration:320ms;animation-delay:calc(var(--d,300ms) * .35)}
 @keyframes sk{from{opacity:1}}
+@keyframes sk2{from{opacity:1}}
 /* phone */
 .phone{position:absolute;right:-3%;bottom:-6%;width:27%;container-type:inline-size;background:var(--inkt);border-radius:16%/8%;padding:3.4%;box-shadow:var(--shadow-lg);transform:translateZ(70px);animation:phone-in var(--d-hero) 120ms var(--ease) backwards}
 @keyframes phone-in{from{opacity:0;transform:translateZ(70px) translateY(40px)}}
-.p-screen{background:#FBF3E6;color:#2B1A0E;border-radius:4.5cqw;aspect-ratio:9/18.5;overflow:hidden;padding:7cqw 6cqw;display:flex;flex-direction:column;gap:5cqw}
-.p-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:7cqw;letter-spacing:-.03em}
-.p-top i{width:9cqw;height:1.4cqw;background:#2B1A0E;border-radius:2px;box-shadow:0 2.6cqw 0 #2B1A0E}
-.p-h{font-size:11cqw;line-height:1;font-weight:700;letter-spacing:-.04em}
-.p-loaf{aspect-ratio:1.3;border-radius:50%;background:radial-gradient(60% 50% at 40% 35%,#F2C98A,#E9B872 55%,#C0802F);transform:rotate(-8deg);margin:2cqw 4cqw}
-.p-btn{background:#2B1A0E;color:#FBF3E6;text-align:center;font-weight:600;font-size:6.5cqw;padding:4cqw;border-radius:99px;margin-top:auto}
+.p-screen{background:var(--bg);color:var(--ink);border-radius:4.5cqw;aspect-ratio:9/18.5;overflow:hidden;padding:7cqw 6cqw;display:flex;flex-direction:column;gap:5cqw;transition:background 250ms var(--ease),color 250ms var(--ease)}
+.p-top{display:flex;justify-content:space-between;align-items:center;gap:3cqw;font-weight:700;font-size:6.5cqw;letter-spacing:-.02em}
+.p-top span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.p-top i{flex:none;width:9cqw;height:1.4cqw;background:var(--ink);border-radius:2px;box-shadow:0 2.6cqw 0 var(--ink)}
+.p-h{font-family:var(--disp);font-size:10.5cqw;line-height:1.02;font-weight:var(--dispw);font-style:var(--dispst);text-transform:var(--disptt);letter-spacing:var(--displs)}
+.p-art{padding:0 6cqw}
+.p-btn{background:var(--btn);color:var(--btnink);text-align:center;font-weight:600;font-size:6.2cqw;padding:4cqw;border-radius:99px;margin-top:auto}
 /* annotations: the brand signature */
 .note{position:absolute;display:flex;align-items:center;gap:var(--s-2);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--leie);white-space:nowrap;animation:note-in 300ms var(--ease) backwards;animation-delay:var(--d,700ms)}
 .note::before{content:"";width:var(--len,40px);height:1px;background:var(--leie)}
@@ -149,14 +188,21 @@ h1{font-size:var(--t-h1);line-height:1;letter-spacing:-.034em;font-weight:700;fo
 .n2{bottom:4px;right:26%;--d:760ms;--len:28px}
 .n3{top:68.5%;left:5%;--d:860ms}
 .n3::before{width:1px;height:18px;position:absolute;left:24px;top:-18px}
+@media(max-width:1100px) and (min-width:901px){.hero-grid{column-gap:var(--s-6)}.conf{padding:var(--s-4)}}
 @media(max-width:900px){
-  .hero{padding-top:var(--s-6)}
-  .hero-grid{grid-template-columns:1fr;gap:var(--s-5)}
-  .stage{padding:var(--s-5) var(--s-5) var(--s-5) 0;max-width:620px}
-  .hero{padding-bottom:var(--s-6)}
-  .n3{display:none}
+  .hero{padding:var(--s-6) 0 var(--s-6)}
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "stage" "conf"}
+  .conf{margin-top:0}
+  .stage{padding:var(--s-6) var(--s-5) var(--s-6) 0;max-width:620px}
 }
-@media(max-width:520px){.note{display:none}.stage{padding-right:var(--s-4)}}
+@media(max-width:520px){
+  .n3,.n2{display:none}
+  .n1{left:20%}
+  .stage{padding-right:var(--s-4)}
+  .conf{padding:var(--s-4);box-shadow:4px 4px 0 var(--inkt)}
+  .dice .t{display:none}
+  .conf-cta .btn{width:100%;justify-content:center;text-align:center}
+}
 
 /* sections */
 .sec{padding:var(--s-10) 0}
@@ -313,53 +359,68 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(-
 <main id="main">
 <section class="hero" aria-labelledby="h1">
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-copy">
       <span class="hero-tag mono"><i aria-hidden="true"></i>Webdeveloper voor kmo's · Gent</span>
       <h1 id="h1">Een snelle website voor je zaak. <span class="mark">Zonder gedoe.</span></h1>
-      <p class="lead">Ik ben Milan. Ik bouw <strong>websites, webshops en slimme tools</strong> voor kleine en middelgrote bedrijven, en regel al het technische zodat jij dat niet hoeft te doen.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-ink">Plan een gratis kennismaking <span class="arr" aria-hidden="true">→</span></a>
-        <a href="#diensten" class="btn btn-line">Wat ik bouw</a>
-      </div>
-      <ul class="hero-facts mono">
-        <li>Laadtijd onder 1 seconde als doel</li>
-        <li>Antwoord binnen 24 uur</li>
-        <li>Gent en heel Vlaanderen</li>
-      </ul>
+      <p class="lead">Ik ben Milan. Ik bouw <strong>websites, webshops en slimme tools</strong> voor kmo's. Benieuwd hoe die van jou eruitziet? Probeer het.</p>
     </div>
 
-    <div class="stage" id="stage" role="img" aria-label="Voorbeeld van een website voor een bakkerij, op laptop en gsm">
+    <form class="conf" id="conf" autocomplete="off" onsubmit="return false">
+      <label class="conf-label" for="zaak"><span>Probeer het live</span><span>jouw site, nu</span></label>
+      <div class="namefield">
+        <input id="zaak" name="zaak" type="text" maxlength="28" placeholder="Hoe heet jouw zaak?" value="Brood &amp; Co" spellcheck="false">
+        <button type="button" class="dice" id="dice" aria-label="Verras me met een voorbeeld"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="1.5" width="13" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5.3" cy="5.3" r="1.2" fill="currentColor"/><circle cx="10.7" cy="10.7" r="1.2" fill="currentColor"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/></svg><span class="t">Verras me</span></button>
+      </div>
+      <fieldset class="sectors">
+        <legend>Wat voor zaak?</legend>
+        <div class="chips" id="chips">
+          <label class="chip"><input type="radio" name="sector" value="bakkerij" checked><span>Bakkerij</span></label>
+          <label class="chip"><input type="radio" name="sector" value="horeca"><span>Horeca</span></label>
+          <label class="chip"><input type="radio" name="sector" value="kapsalon"><span>Kapsalon</span></label>
+          <label class="chip"><input type="radio" name="sector" value="bouw"><span>Bouw</span></label>
+          <label class="chip"><input type="radio" name="sector" value="winkel"><span>Winkel</span></label>
+          <label class="chip"><input type="radio" name="sector" value="praktijk"><span>Praktijk</span></label>
+        </div>
+      </fieldset>
+      <div class="conf-cta">
+        <a class="btn btn-ink" id="send" href="mailto:info@milandevlieger.be?subject=Website%20aanvraag">Wil je deze echt? Stuur hem naar Milan <span class="arr" aria-hidden="true">→</span></a>
+        <button type="button" class="linkbtn" id="share">Link kopiëren</button>
+      </div>
+      <p class="sr" id="live" aria-live="polite"></p>
+    </form>
+
+    <div class="stage" id="stage" role="img" aria-label="Voorbeeld van een website voor Brood &amp; Co, een bakkerij, op laptop en gsm">
       <div class="scene" id="scene">
         <div class="browser">
-          <div class="chrome"><i></i><i></i><i></i><span class="url"><b aria-hidden="true">●</b> jouwzaak.be</span></div>
-          <div class="site" aria-hidden="true">
-            <div class="s-nav sk" style="--d:260ms"><span class="s-logo">Brood &amp; Co</span><span class="s-links"><span>Assortiment</span><span>Openingsuren</span><span>Contact</span></span></div>
+          <div class="chrome"><i></i><i></i><i></i><span class="url"><b aria-hidden="true">●</b> <span id="url">broodenco.be</span></span></div>
+          <div class="site" id="site" aria-hidden="true">
+            <div class="s-nav sk" style="--d:260ms"><span class="s-logo"><b>B</b><span>Brood &amp; Co</span></span><span class="s-links"><span>Assortiment</span><span>Openingsuren</span><span>Contact</span></span></div>
             <div class="s-hero">
               <div class="sk" style="--d:360ms">
                 <div class="s-h">Vers brood, elke ochtend.</div>
                 <p class="s-p">Bestel vandaag, haal morgen op vanaf 6u30.</p>
                 <span class="s-btn">Bestel online</span>
               </div>
-              <div class="loaf sk" style="--d:460ms"></div>
+              <div class="s-art sk" style="--d:460ms"></div>
             </div>
             <div class="s-tiles sk" style="--d:540ms">
-              <div class="s-tile"><span style="background:#E9B872"></span>Desem</div>
-              <div class="s-tile"><span style="background:#C98B4A"></span>Volkoren</div>
-              <div class="s-tile"><span style="background:#F2D4A0"></span>Croissants</div>
+              <div class="s-tile"><i style="background:#E9B872"></i>Desem</div>
+              <div class="s-tile"><i style="background:#C98B4A"></i>Volkoren</div>
+              <div class="s-tile"><i style="background:#F2D4A0"></i>Croissants</div>
             </div>
           </div>
         </div>
         <div class="phone" aria-hidden="true">
-          <div class="p-screen">
-            <div class="p-top">Brood &amp; Co<i></i></div>
+          <div class="p-screen" id="pscreen">
+            <div class="p-top"><span>Brood &amp; Co</span><i></i></div>
             <div class="p-h">Vers brood, elke ochtend.</div>
-            <div class="p-loaf"></div>
+            <div class="p-art"></div>
             <div class="p-btn">Bestel online</div>
           </div>
         </div>
       </div>
-      <span class="note n1" aria-hidden="true"><b>laadt in 0,8 s</b></span>
-      <span class="note n3" aria-hidden="true"><b>online bestellen</b></span>
+      <span class="note n1" aria-hidden="true"><b>laadt in &lt; 1 s</b></span>
+      <span class="note n3" aria-hidden="true"><b id="feat">online bestellen</b></span>
       <span class="note n2 flip" aria-hidden="true"><b>werkt op elke gsm</b></span>
     </div>
   </div>
@@ -563,6 +624,116 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(-
       scene.style.setProperty('--rx', (-y*8).toFixed(2)+'deg');
     });
     stage.addEventListener('pointerleave', () => { scene.style.removeProperty('--ry'); scene.style.removeProperty('--rx'); });
+  }
+})();
+</script>
+<script>
+// live configurator: the visitor's own website, built while they type
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SANS = 'var(--f-sans)', SERIF = 'Georgia,"Times New Roman",serif';
+  const ART = {
+    bakkerij: '<svg viewBox="0 0 120 90"><ellipse class="a" cx="60" cy="50" rx="50" ry="30" transform="rotate(-8 60 50)"/><ellipse class="s" cx="50" cy="40" rx="30" ry="14" opacity=".6" transform="rotate(-8 60 50)"/><path class="ls" stroke-width="3.2" opacity=".55" d="M34 42q14-8 26-6M44 56q16-9 30-6M62 66q12-6 22-4"/></svg>',
+    horeca: '<svg viewBox="0 0 120 90"><g class="s"><rect x="40" y="10" width="7" height="40" rx="2" transform="rotate(-12 43 30)"/><rect x="50" y="4" width="7" height="44" rx="2" transform="rotate(-4 53 26)"/><rect x="60" y="6" width="7" height="42" rx="2" transform="rotate(5 63 27)"/><rect x="70" y="12" width="7" height="38" rx="2" transform="rotate(13 73 31)"/><rect x="55" y="14" width="7" height="36" rx="2"/></g><path class="a" d="M30 40h60l-12 48H42z"/><path class="c" d="M44 40h7l-3 48h-6zM62 40h7l2 48h-6z" opacity=".9"/></svg>',
+    kapsalon: '<svg viewBox="0 0 120 90"><circle class="la" stroke-width="6" cx="34" cy="64" r="13"/><circle class="la" stroke-width="6" cx="34" cy="26" r="13"/><path class="ls" stroke-width="6" d="M45 58 104 18M45 32l59 40"/><circle class="i" cx="62" cy="45" r="4"/></svg>',
+    bouw: '<svg viewBox="0 0 120 90"><path class="s" d="M24 46h72v42H24z"/><path class="a" d="M14 50 60 14l46 36z"/><path class="i" d="M52 62h16v26H52z"/><path class="c" d="M32 58h12v12H32zM76 58h12v12H76z"/><path class="ls" stroke-width="2" opacity=".35" d="M24 76h28M68 76h28M24 66h8M88 66h8"/><path class="i" d="M84 18h8v18l-8-6z"/></svg>',
+    winkel: '<svg viewBox="0 0 120 90"><path class="ls" stroke-width="5" d="M46 34v-8a14 14 0 0 1 28 0v8"/><rect class="a" x="28" y="32" width="64" height="56" rx="8"/><rect class="s" x="28" y="32" width="64" height="10" rx="4" opacity=".7"/><circle class="c" cx="78" cy="70" r="9"/><path class="ls" stroke-width="2.5" d="M74 70h8"/></svg>',
+    praktijk: '<svg viewBox="0 0 120 90"><rect class="s" x="22" y="6" width="76" height="76" rx="20"/><path class="a" d="M52 20h16v16h16v16H68v16H52V52H36V36h16z"/><path class="ls" stroke-width="3" d="M4 64h22l6-12 8 22 6-10h74" opacity=".8"/></svg>'
+  };
+  const T = {
+    bakkerij: {label:'bakkerij', h:'Vers brood, elke ochtend.', p:'Bestel vandaag, haal morgen op vanaf 6u30.', cta:'Bestel online', nav:['Assortiment','Openingsuren','Contact'], tiles:[['Desem','#E9B872'],['Volkoren','#C98B4A'],['Croissants','#F2D4A0']], feat:'online bestellen',
+      v:{bg:'#FBF3E6',ink:'#2B1A0E',acc:'#D99A4E',soft:'#F2C98A',card:'#FFFFFF',btn:'#2B1A0E',btnink:'#FBF3E6',disp:SANS,dispw:700,dispst:'normal',disptt:'none',displs:'-.04em'}},
+    horeca: {label:'horecazaak', h:'Honger? Je tafel staat klaar.', p:'Open van woensdag tot zondag, keuken tot 22u.', cta:'Reserveer een tafel', nav:['Menu','Terras','Contact'], tiles:[['Menukaart','#FFC93C'],['Terras','#E63B2E'],['Groepen','#FFF3DF']], feat:'online reserveren',
+      v:{bg:'#1E1A17',ink:'#FFF3DF',acc:'#E63B2E',soft:'#FFC93C',card:'#2C2622',btn:'#FFC93C',btnink:'#1E1A17',disp:SERIF,dispw:700,dispst:'italic',disptt:'none',displs:'-.02em'}},
+    kapsalon: {label:'kapsalon', h:'Zin in een nieuwe look?', p:'Knippen, kleuren en stylen, zonder wachtrij.', cta:'Boek je afspraak', nav:['Prijzen','Team','Boeken'], tiles:[['Knippen','#C2185B'],['Kleuren','#F0B8C9'],['Baard','#3A1420']], feat:'afspraak boeken',
+      v:{bg:'#F7EAEE',ink:'#3A1420',acc:'#C2185B',soft:'#F0B8C9',card:'#FFFFFF',btn:'#C2185B',btnink:'#FFFFFF',disp:SERIF,dispw:400,dispst:'italic',disptt:'none',displs:'-.02em'}},
+    bouw: {label:'bouwbedrijf', h:'Wij bouwen. Jij woont.', p:'Renovatie en nieuwbouw in de regio Gent.', cta:'Vraag een offerte', nav:['Projecten','Diensten','Contact'], tiles:[['Renovatie','#F2A900'],['Nieuwbouw','#1B1B1B'],['Dakwerken','#D9D6CC']], feat:'offerte aanvragen',
+      v:{bg:'#F1F0EB',ink:'#1B1B1B',acc:'#F2A900',soft:'#D9D6CC',card:'#FFFFFF',btn:'#1B1B1B',btnink:'#F2A900',disp:SANS,dispw:800,dispst:'normal',disptt:'uppercase',displs:'-.02em'}},
+    winkel: {label:'winkel', h:'Nieuwe collectie, nu ook online.', p:'Gratis afhalen in de winkel of thuis geleverd.', cta:'Shop de collectie', nav:['Nieuw','Sale','Winkel'], tiles:[['Nieuw','#2F7D4F'],['Sale','#BFD9C6'],['Cadeaus','#10251A']], feat:'webshop: aan',
+      v:{bg:'#EDF3EE',ink:'#10251A',acc:'#2F7D4F',soft:'#BFD9C6',card:'#FFFFFF',btn:'#2F7D4F',btnink:'#FFFFFF',disp:SANS,dispw:600,dispst:'normal',disptt:'none',displs:'-.035em'}},
+    praktijk: {label:'praktijk', h:'Zorg dichtbij, afspraak in een klik.', p:'Kinesitherapie en revalidatie, ook op zaterdag.', cta:'Maak een afspraak', nav:['Behandelingen','Team','Afspraak'], tiles:[['Kine','#2A6FDB'],['Sport','#C4D8F3'],['Revalidatie','#0F2A44']], feat:'online afspraak',
+      v:{bg:'#EDF3FA',ink:'#0F2A44',acc:'#2A6FDB',soft:'#C4D8F3',card:'#FFFFFF',btn:'#2A6FDB',btnink:'#FFFFFF',disp:SANS,dispw:700,dispst:'normal',disptt:'none',displs:'-.035em'}}
+  };
+  const SAMPLES = [['Frituur Gilbert','horeca'],['Kapsalon Lien','kapsalon'],['Bouw De Smet','bouw'],['Boetiek Margot','winkel'],['Kine Leiekant','praktijk'],['Bakkerij Ons Brood','bakkerij'],['Café De Kroon','horeca'],['Studio Haar & Zo','kapsalon'],['Fietsen Van Hecke','winkel'],['Dakwerken Pieters','bouw']];
+  const DEF = 'Brood & Co';
+
+  const $ = id => document.getElementById(id);
+  const input = $('zaak'), scene = $('scene'), site = $('site'), ps = $('pscreen'), stage = $('stage');
+  const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const slug = n => (n.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/&/g,'en').replace(/[^a-z0-9]/g,'') || 'jouwzaak').slice(0, 24) + '.be';
+  const sector = () => document.querySelector('input[name=sector]:checked').value;
+  const name = () => input.value.trim() || 'Jouw zaak';
+
+  function paint(rebuild){
+    const k = sector(), t = T[k], n = name(), N = esc(n);
+    Object.entries(t.v).forEach(([key,val]) => scene.style.setProperty('--' + key, val));
+    $('url').textContent = slug(input.value.trim());
+    site.querySelector('.s-logo').innerHTML = '<b>' + esc(n.charAt(0).toUpperCase()) + '</b><span>' + N + '</span>';
+    site.querySelector('.s-links').innerHTML = t.nav.map(x => '<span>' + x + '</span>').join('');
+    site.querySelector('.s-h').textContent = t.h;
+    site.querySelector('.s-p').textContent = t.p;
+    site.querySelector('.s-btn').textContent = t.cta;
+    site.querySelector('.s-art').innerHTML = ART[k];
+    site.querySelector('.s-tiles').innerHTML = t.tiles.map(([l,c]) => '<div class="s-tile"><i style="background:' + c + '"></i>' + l + '</div>').join('');
+    ps.querySelector('.p-top span').textContent = n;
+    ps.querySelector('.p-h').textContent = t.h;
+    ps.querySelector('.p-art').innerHTML = ART[k];
+    ps.querySelector('.p-btn').textContent = t.cta;
+    $('feat').textContent = t.feat;
+    stage.setAttribute('aria-label', 'Voorbeeld van een website voor ' + n + ', een ' + t.label + ', op laptop en gsm');
+
+    const custom = input.value.trim() && input.value.trim() !== DEF;
+    const subj = 'Website voor ' + n;
+    const body = 'Hoi Milan,\n\nIk heb op je site een website uitgeprobeerd voor ' + n + ' (' + t.label + '). Zo wil ik er wel eentje!\n\nMijn ontwerp: ' + link() + '\n\nKunnen we eens kennismaken?\n';
+    const mail = 'mailto:info@milandevlieger.be?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+    $('send').href = mail;
+    const ch = document.querySelector('.channel.main'); if (ch) ch.href = mail;
+    const ct = $('h-contact'); if (ct) ct.textContent = custom ? 'Zullen we ' + n + ' online zetten?' : 'Vertel me over je zaak.';
+
+    try { history.replaceState(null, '', custom || k !== 'bakkerij' ? '?zaak=' + encodeURIComponent(input.value.trim()) + '&sector=' + k : location.pathname); } catch(e) {}
+    if (rebuild && !reduce){
+      scene.classList.remove('re','bump'); void scene.offsetWidth; scene.classList.add('re','bump');
+    }
+  }
+  const link = () => location.origin + location.pathname + '?zaak=' + encodeURIComponent(input.value.trim()) + '&sector=' + sector();
+  let liveT;
+  const announce = () => { clearTimeout(liveT); liveT = setTimeout(() => { $('live').textContent = 'Voorbeeld bijgewerkt voor ' + name() + ', ' + T[sector()].label + '.'; }, 700); };
+
+  input.addEventListener('input', () => { stopDemo(); paint(false); announce(); });
+  input.addEventListener('focus', () => { stopDemo(); input.select(); });
+  document.querySelectorAll('input[name=sector]').forEach(r => r.addEventListener('change', () => { paint(true); announce(); }));
+  $('dice').addEventListener('click', () => {
+    stopDemo();
+    let s; do { s = SAMPLES[Math.random()*SAMPLES.length|0]; } while (s[0] === input.value);
+    input.value = s[0]; document.querySelector('input[name=sector][value=' + s[1] + ']').checked = true;
+    paint(true); announce();
+  });
+  const share = $('share');
+  share.addEventListener('click', async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(link()); ok = true; } catch(e) {}
+    share.textContent = ok ? 'Gekopieerd ✓' : 'Kopiëren lukte niet';
+    share.classList.toggle('ok', ok);
+    setTimeout(() => { share.textContent = 'Link kopiëren'; share.classList.remove('ok'); }, 1800);
+  });
+
+  // shared link: open straight into that design
+  const q = new URLSearchParams(location.search);
+  const qs = q.get('sector'), qz = q.get('zaak');
+  if (qs && T[qs]) document.querySelector('input[name=sector][value=' + qs + ']').checked = true;
+  if (qz !== null) input.value = qz.slice(0, 28);
+  paint(false);
+
+  // first visit: the name types itself once, so people see the field is alive
+  let demo = null;
+  function stopDemo(){ if (demo){ clearInterval(demo); demo = null; } }
+  if (!reduce && qz === null && !qs){
+    const target = DEF; let i = 0;
+    input.value = ''; paint(false);
+    setTimeout(() => {
+      if (document.activeElement === input) return;
+      demo = setInterval(() => { i++; input.value = target.slice(0, i); paint(false); if (i >= target.length) stopDemo(); }, 70);
+    }, 900);
   }
 })();
 </script>
